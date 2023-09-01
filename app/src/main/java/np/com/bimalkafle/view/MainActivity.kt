@@ -1,5 +1,6 @@
 package np.com.bimalkafle.view
 
+import android.content.res.Configuration
 import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -35,13 +36,23 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var mainViewModel: MainViewModel
     lateinit var binding : ActivityMainBinding
+     var isDark = false;
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+//        when(resources.configuration.uiMode and
+//                Configuration.UI_MODE_NIGHT_MASK){
+//            Configuration.UI_MODE_NIGHT_YES -> isDark = true
+//            Configuration.UI_MODE_NIGHT_NO -> isDark = false
+//            Configuration.UI_MODE_NIGHT_UNDEFINED -> isDark = false
+//            else -> isDark = false
+//        }
         binding.mainParentLayout.setBackgroundResource(R.color.primary)
+
 
 
         val apiService = RetrofitHelper.getInstance().create(ApiService::class.java)
@@ -61,9 +72,21 @@ class MainActivity : AppCompatActivity() {
                     UiUtil.showToast(this,it.message?: getString(R.string.something_went_wrong))
                 }
                 is ApiResponse.ApiSuccess ->{
+                    if(it.data?.current?.is_day==0){
+                        binding.mainParentLayout.setBackgroundResource(R.color.primary_dark)
+                    }else{
+                        binding.mainParentLayout.setBackgroundResource(R.color.primary)
+                    }
+
                     binding.progressIndicator.visibility = INVISIBLE
                     Glide.with(this).load("https:"+it.data?.current?.condition?.icon).into(binding.imageView)
+                    binding.dateTextview.text = it.data?.location?.localtime?.split(" ")?.get(0)
+                    binding.timeTextview.text = it.data?.location?.localtime?.split(" ")?.get(1)
                     binding.placeTextview.text = it.data?.location?.name
+                    binding.conditionTextview.text = it.data?.current?.condition?.text
+                    binding.uvTextview.text = it.data?.current?.uv.toString()
+                    binding.percipationTextview.text =getString(R.string.unit_precipitation, it.data?.current?.precip_mm.toString())
+
                     binding.temperatureCelsiusTextview.text =
                         getString(R.string.unit_degree_celsius, it.data?.current?.temp_c.toString())
                     binding.humidityTextview.text = getString(R.string.unit_percent, it.data?.current?.humidity.toString())

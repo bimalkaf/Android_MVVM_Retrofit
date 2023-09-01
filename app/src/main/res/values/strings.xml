@@ -4,7 +4,12 @@
     <string name="unit_degree_celsius">%1$s °c</string>
     <string name="unit_percent">%1$s%%</string>
     <string name="unit_kph">%1$s km/h</string>
+    <string name="unit_precipitation">%1$s mm</string>
     <string name="humidity">Humidity</string>
+    <string name="uv">UV</string>
+    <string name="local_time">Local Time</string>
+    <string name="local_date">Local Date</string>
     <string name="wind_speed">Wind Speed</string>
+    <string name="precipitation">Precipitation </string>
     <string name="something_went_wrong">Something went wrong</string>
 </resources>

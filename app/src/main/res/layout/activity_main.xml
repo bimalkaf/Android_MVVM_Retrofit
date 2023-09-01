@@ -13,100 +13,224 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/search_card_view"
+
             app:cardCornerRadius="20dp">
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/searchView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:iconifiedByDefault="false"
-                app:queryHint="Search"
+                app:queryHint="Enter place name"
+                android:queryBackground="@android:color/transparent"
                 app:iconifiedByDefault="false" />
+            <ProgressBar
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="end"
+                android:id="@+id/progress_indicator"
+                android:layout_below="@id/search_card_view"
+                android:layout_centerInParent="true"
+                android:layout_margin="10dp"
+                android:indeterminateTint="@color/primary_variant" />
         </androidx.cardview.widget.CardView>
 
-    <ProgressBar
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:id="@+id/progress_indicator"
-        android:layout_below="@id/search_card_view"
-        android:layout_centerInParent="true"
-        android:layout_margin="10dp"
-        android:indeterminateTint="@color/white" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_centerInParent="true"
+        android:layout_below="@+id/search_card_view"
+        android:layout_margin="20dp"
         android:gravity="center">
-
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:id="@+id/image_view"
-            tools:src="@color/white"/>
-        <TextView
-            android:layout_margin="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/temperature_celsius_textview"
-            android:textStyle="bold"
-            android:textColor="@color/design_default_color_on_primary"
-            style="@style/TextAppearance.Material3.DisplayLarge"
-            tools:text="10°c"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/place_textview"
             android:textColor="@color/design_default_color_on_primary"
             style="@style/TextAppearance.Material3.DisplaySmall"
-            tools:text="New York"/>
+            tools:text="New York"
+            android:drawableStart="@drawable/icon_location"
+            android:layout_gravity="start"
+            android:drawablePadding="10dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
             android:orientation="horizontal">
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/humidity_textview"
-                    android:textColor="@color/design_default_color_on_primary"
-                    style="@style/TextAppearance.Material3.HeadlineSmall"
-                    tools:text="89%"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/design_default_color_on_primary"
-                    style="@style/TextAppearance.Material3.LabelLarge"
-                    android:text="@string/humidity"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/temperature_celsius_textview"
+                android:textStyle="bold"
+                android:textColor="@color/design_default_color_on_primary"
+                style="@style/TextAppearance.Material3.DisplayLarge"
+                tools:text="10°c"/>
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1"
-                android:gravity="center">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/wind_speed_textview"
-                    android:textColor="@color/design_default_color_on_primary"
-                    style="@style/TextAppearance.Material3.HeadlineSmall"
-                    tools:text="89%"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/design_default_color_on_primary"
-                    style="@style/TextAppearance.Material3.LabelLarge"
-                    android:text="@string/wind_speed"/>
-            </LinearLayout>
+                android:paddingStart="12dp"
+                android:id="@+id/condition_textview"
+                android:textColor="@color/design_default_color_on_primary"
+                style="@style/TextAppearance.Material3.TitleLarge"
+                tools:text="Cloudy"/>
         </LinearLayout>
+
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:id="@+id/image_view"
+            tools:src="@color/white"/>
+
+
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            app:cardCornerRadius="16dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="12dp"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/humidity_textview"
+                            style="@style/TextAppearance.Material3.HeadlineSmall"
+                            tools:text="89%"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/TextAppearance.Material3.LabelLarge"
+                            android:text="@string/humidity"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:gravity="center">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/wind_speed_textview"
+                            style="@style/TextAppearance.Material3.HeadlineSmall"
+                            tools:text="89%"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/TextAppearance.Material3.LabelLarge"
+                            android:text="@string/wind_speed"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="12dp"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/uv_textview"
+                        style="@style/TextAppearance.Material3.HeadlineSmall"
+                        tools:text="89%"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/TextAppearance.Material3.LabelLarge"
+                        android:text="@string/uv"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/percipation_textview"
+                        style="@style/TextAppearance.Material3.HeadlineSmall"
+                        tools:text="89%"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/TextAppearance.Material3.LabelLarge"
+                        android:text="@string/precipitation"/>
+                </LinearLayout>
+
+            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="12dp"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/time_textview"
+                            style="@style/TextAppearance.Material3.HeadlineSmall"
+                            tools:text="89%"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/TextAppearance.Material3.LabelLarge"
+                            android:text="@string/local_time"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:gravity="center">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/date_textview"
+                            style="@style/TextAppearance.Material3.HeadlineSmall"
+                            tools:text="89%"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/TextAppearance.Material3.LabelLarge"
+                            android:text="@string/local_date"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+
 
 
     </LinearLayout>
