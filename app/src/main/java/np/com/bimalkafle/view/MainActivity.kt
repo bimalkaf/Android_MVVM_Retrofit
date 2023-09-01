@@ -1,22 +1,10 @@
 package np.com.bimalkafle.view
 
-import android.content.res.Configuration
-import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.view.View.GONE
 import android.view.View.INVISIBLE
-import android.widget.ImageView
-import android.widget.RelativeLayout
-import android.widget.SearchView.OnQueryTextListener
 import android.widget.SearchView.VISIBLE
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import np.com.bimalkafle.R
@@ -29,15 +17,12 @@ import np.com.bimalkafle.repository.WeatherRepository
 import np.com.bimalkafle.util.UiUtil
 import np.com.bimalkafle.viewmodel.MainViewModel
 import np.com.bimalkafle.viewmodel.MainViewModelFactory
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import java.net.URL
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var mainViewModel: MainViewModel
     lateinit var binding : ActivityMainBinding
-     var isDark = false;
+//     var isDark = false;
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,31 +48,33 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel.getCurrentWeather("Kathmandu")
 
-        mainViewModel.currentWeather.observe(this, Observer {
-            when(it){
-                is ApiResponse.ApiLoading ->{
+        mainViewModel.currentWeather.observe(this) {
+            when (it) {
+                is ApiResponse.ApiLoading -> {
                     binding.progressIndicator.visibility = VISIBLE
                 }
-                is ApiResponse.ApiError ->{
+
+                is ApiResponse.ApiError -> {
                     binding.progressIndicator.visibility = INVISIBLE
-                    UiUtil.showToast(this,it.message?: getString(R.string.something_went_wrong))
+                    UiUtil.showToast(this, it.message ?: getString(R.string.something_went_wrong))
                 }
-                is ApiResponse.ApiSuccess ->{
+
+                is ApiResponse.ApiSuccess -> {
                     setLocationData(it.data)
-                       }
+                }
 
             }
-        })
+        }
 
         binding.searchView.setOnQueryTextListener( object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 mainViewModel.getCurrentWeather(query?:"Kathmandu")
                 binding.searchView.clearFocus()
-                return true;
+                return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                return true;
+                return true
             }
 
         })
@@ -97,25 +84,25 @@ class MainActivity : AppCompatActivity() {
 
     private fun setLocationData(data: CurrentWeatherModel?) {
        data?.let {
-           if(it.current?.is_day==0){
+           if(it.current.is_day==0){
                binding.mainParentLayout.setBackgroundResource(R.color.primary_dark)
            }else{
                binding.mainParentLayout.setBackgroundResource(R.color.primary)
            }
 
            binding.progressIndicator.visibility = INVISIBLE
-           Glide.with(this).load("https:"+it.current?.condition?.icon).into(binding.imageView)
-           binding.dateTextview.text = it.location?.localtime?.split(" ")?.get(0)
-           binding.timeTextview.text = it.location?.localtime?.split(" ")?.get(1)
-           binding.placeTextview.text = it.location?.name
-           binding.conditionTextview.text = it.current?.condition?.text
-           binding.uvTextview.text = it.current?.uv.toString()
-           binding.percipationTextview.text =getString(R.string.unit_precipitation, it.current?.precip_mm.toString())
+           Glide.with(this).load("https:"+it.current.condition.icon).into(binding.imageView)
+           binding.dateTextview.text = it.location.localtime.split(" ")[0]
+           binding.timeTextview.text = it.location.localtime.split(" ")[1]
+           binding.placeTextview.text = it.location.name
+           binding.conditionTextview.text = it.current.condition.text
+           binding.uvTextview.text = it.current.uv.toString()
+           binding.percipationTextview.text =getString(R.string.unit_precipitation, it.current.precip_mm.toString())
 
            binding.temperatureCelsiusTextview.text =
-               getString(R.string.unit_degree_celsius, it.current?.temp_c.toString())
-           binding.humidityTextview.text = getString(R.string.unit_percent, it.current?.humidity.toString())
-           binding.windSpeedTextview.text = getString(R.string.unit_kph, it.current?.wind_kph.toString())
+               getString(R.string.unit_degree_celsius, it.current.temp_c.toString())
+           binding.humidityTextview.text = getString(R.string.unit_percent, it.current.humidity.toString())
+           binding.windSpeedTextview.text = getString(R.string.unit_kph, it.current.wind_kph.toString())
 
        }
     }
