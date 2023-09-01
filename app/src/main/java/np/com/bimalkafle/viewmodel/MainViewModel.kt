@@ -12,9 +12,9 @@ import okhttp3.Interceptor
 
 class MainViewModel(private val weatherRepository: WeatherRepository) :ViewModel() {
 
-     fun getCurrentWeather(){
+     fun getCurrentWeather( query : String){
         viewModelScope.launch(Dispatchers.IO) {
-            weatherRepository.getCurrentWeather("Kathmandu")
+            weatherRepository.getCurrentWeather(query)
         }
     }
 
