@@ -24,6 +24,7 @@ import np.com.bimalkafle.api.ApiResponse
 import np.com.bimalkafle.api.ApiService
 import np.com.bimalkafle.api.RetrofitHelper
 import np.com.bimalkafle.databinding.ActivityMainBinding
+import np.com.bimalkafle.model.current.CurrentWeatherModel
 import np.com.bimalkafle.repository.WeatherRepository
 import np.com.bimalkafle.util.UiUtil
 import np.com.bimalkafle.viewmodel.MainViewModel
@@ -72,26 +73,8 @@ class MainActivity : AppCompatActivity() {
                     UiUtil.showToast(this,it.message?: getString(R.string.something_went_wrong))
                 }
                 is ApiResponse.ApiSuccess ->{
-                    if(it.data?.current?.is_day==0){
-                        binding.mainParentLayout.setBackgroundResource(R.color.primary_dark)
-                    }else{
-                        binding.mainParentLayout.setBackgroundResource(R.color.primary)
-                    }
-
-                    binding.progressIndicator.visibility = INVISIBLE
-                    Glide.with(this).load("https:"+it.data?.current?.condition?.icon).into(binding.imageView)
-                    binding.dateTextview.text = it.data?.location?.localtime?.split(" ")?.get(0)
-                    binding.timeTextview.text = it.data?.location?.localtime?.split(" ")?.get(1)
-                    binding.placeTextview.text = it.data?.location?.name
-                    binding.conditionTextview.text = it.data?.current?.condition?.text
-                    binding.uvTextview.text = it.data?.current?.uv.toString()
-                    binding.percipationTextview.text =getString(R.string.unit_precipitation, it.data?.current?.precip_mm.toString())
-
-                    binding.temperatureCelsiusTextview.text =
-                        getString(R.string.unit_degree_celsius, it.data?.current?.temp_c.toString())
-                    binding.humidityTextview.text = getString(R.string.unit_percent, it.data?.current?.humidity.toString())
-                    binding.windSpeedTextview.text = getString(R.string.unit_kph, it.data?.current?.wind_kph.toString())
-                }
+                    setLocationData(it.data)
+                       }
 
             }
         })
@@ -108,7 +91,36 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+        
+       
     }
+
+    private fun setLocationData(data: CurrentWeatherModel?) {
+       data?.let {
+           if(it.current?.is_day==0){
+               binding.mainParentLayout.setBackgroundResource(R.color.primary_dark)
+           }else{
+               binding.mainParentLayout.setBackgroundResource(R.color.primary)
+           }
+
+           binding.progressIndicator.visibility = INVISIBLE
+           Glide.with(this).load("https:"+it.current?.condition?.icon).into(binding.imageView)
+           binding.dateTextview.text = it.location?.localtime?.split(" ")?.get(0)
+           binding.timeTextview.text = it.location?.localtime?.split(" ")?.get(1)
+           binding.placeTextview.text = it.location?.name
+           binding.conditionTextview.text = it.current?.condition?.text
+           binding.uvTextview.text = it.current?.uv.toString()
+           binding.percipationTextview.text =getString(R.string.unit_precipitation, it.current?.precip_mm.toString())
+
+           binding.temperatureCelsiusTextview.text =
+               getString(R.string.unit_degree_celsius, it.current?.temp_c.toString())
+           binding.humidityTextview.text = getString(R.string.unit_percent, it.current?.humidity.toString())
+           binding.windSpeedTextview.text = getString(R.string.unit_kph, it.current?.wind_kph.toString())
+
+       }
+    }
+
+
 }
 
 
