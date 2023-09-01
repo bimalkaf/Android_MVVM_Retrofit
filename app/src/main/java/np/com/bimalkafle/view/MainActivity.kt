@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import np.com.bimalkafle.R
+import np.com.bimalkafle.api.ApiResponse
 import np.com.bimalkafle.api.ApiService
 import np.com.bimalkafle.api.RetrofitHelper
 import np.com.bimalkafle.repository.WeatherRepository
@@ -36,7 +38,18 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.getCurrentWeather()
 
         mainViewModel.currentWeather.observe(this, Observer {
-            helloWorld.setText(it.toString())
+            when(it){
+                is ApiResponse.ApiLoading ->{
+                    helloWorld.text = "Loading..."
+                }
+                is ApiResponse.ApiError ->{
+                    helloWorld.text = it.message
+                }
+                is ApiResponse.ApiSuccess ->{
+                    helloWorld.text = it.data.toString()
+                }
+
+            }
         })
     }
 }

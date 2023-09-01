@@ -5,12 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import np.com.bimalkafle.api.ApiResponse
 import np.com.bimalkafle.model.current.CurrentWeatherModel
 import np.com.bimalkafle.repository.WeatherRepository
 import okhttp3.Interceptor
 
 class MainViewModel(private val weatherRepository: WeatherRepository) :ViewModel() {
-
 
      fun getCurrentWeather(){
         viewModelScope.launch(Dispatchers.IO) {
@@ -18,7 +18,7 @@ class MainViewModel(private val weatherRepository: WeatherRepository) :ViewModel
         }
     }
 
-    val currentWeather : LiveData<CurrentWeatherModel>
+    val currentWeather : LiveData<ApiResponse<CurrentWeatherModel>>
         get() {
            return weatherRepository._currentWeather
         }
