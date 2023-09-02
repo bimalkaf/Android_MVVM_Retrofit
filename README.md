@@ -23,5 +23,6 @@ The Weather App is built using the following technologies and libraries:
 
 ## Screenshots
 
+![Untitled design](https://github.com/bimalkaf/Android_Retrofit/assets/60041910/b63a1f88-88f4-441c-bad4-a928b3451f1c)
 
 
