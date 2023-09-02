@@ -54,6 +54,23 @@ By leveraging these technologies and adhering to best practices, the Weather App
 - Dynamic background changes based on the time of day (day or night).
 - Real-time updates using the WeatherAPI.
 
+## How to run 
+1 Clone this repo 
+
+`git clone https://github.com/bimalkaf/Android_Retrofit`
+
+2 In the RetrofitHelper class located in the np.com.bimalkafle.api package, replace YOUR_API_KEY with your actual API key:
+
+`private const val API_KEY = "YOUR_API_KEY"`
+
+Get api key from https://www.weatherapi.com/
+
+3. Build and Run:
+   
+   Open the project in Android Studio or your preferred Android development environment. Build and run the application on an Android emulator or a physical Android device.
+
+
+
 ## Screenshots
 
 ![Untitled design](https://github.com/bimalkaf/Android_Retrofit/assets/60041910/b63a1f88-88f4-441c-bad4-a928b3451f1c)
