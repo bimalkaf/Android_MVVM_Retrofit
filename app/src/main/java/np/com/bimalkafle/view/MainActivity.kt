@@ -7,33 +7,31 @@ import android.widget.SearchView.VISIBLE
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import dagger.hilt.android.AndroidEntryPoint
 import np.com.bimalkafle.R
-import np.com.bimalkafle.WeatherApplication
 import np.com.bimalkafle.api.ApiResponse
-import np.com.bimalkafle.api.ApiService
-import np.com.bimalkafle.api.RetrofitHelper
 import np.com.bimalkafle.databinding.ActivityMainBinding
 import np.com.bimalkafle.model.current.CurrentWeatherModel
-import np.com.bimalkafle.repository.WeatherRepository
 import np.com.bimalkafle.util.UiUtil
 import np.com.bimalkafle.viewmodel.MainViewModel
-import np.com.bimalkafle.viewmodel.MainViewModelFactory
-import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    @Inject
+
     lateinit var mainViewModel: MainViewModel
+
     lateinit var binding : ActivityMainBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (applicationContext as WeatherApplication).applicationComponent.inject(this)
+
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.mainParentLayout.setBackgroundResource(R.drawable.gradient_background_day)
+        mainViewModel = ViewModelProvider(this)[MainViewModel :: class.java]
         mainViewModel.getCurrentWeather("Kathmandu")
 
         mainViewModel.currentWeather.observe(this) {
