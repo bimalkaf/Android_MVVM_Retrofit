@@ -1,4 +1,4 @@
-package np.com.bimalkafle.module
+package np.com.bimalkafle.di.module
 
 import dagger.Module
 import dagger.Provides
