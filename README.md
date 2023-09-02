@@ -34,6 +34,15 @@ Glide is used for efficient loading and caching of weather condition images in t
 
 - **Integration**: It integrates seamlessly with Android's ImageView and supports features like placeholder images and error handling, enhancing the user experience.
 
+### Dagger and Hilt
+
+The Weather App now incorporates Dagger and Hilt for dependency injection:
+
+- **Dagger**: Dagger is used to manage dependencies and enable efficient, modular code design.
+
+- **Hilt**: Hilt simplifies dependency injection in Android apps, making it easier to provide and inject dependencies while following best practices.
+
+
 ### Clean Code and Clean Architecture
 
 The project follows clean architecture principles to maintain a clean and modular codebase. Here's why clean code is crucial:
