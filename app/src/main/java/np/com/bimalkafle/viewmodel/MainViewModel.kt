@@ -8,8 +8,9 @@ import kotlinx.coroutines.launch
 import np.com.bimalkafle.api.ApiResponse
 import np.com.bimalkafle.model.current.CurrentWeatherModel
 import np.com.bimalkafle.repository.WeatherRepository
+import javax.inject.Inject
 
-class MainViewModel(private val weatherRepository: WeatherRepository) :ViewModel() {
+class MainViewModel @Inject constructor(private val weatherRepository: WeatherRepository) :ViewModel() {
 
      fun getCurrentWeather( query : String){
         viewModelScope.launch(Dispatchers.IO) {

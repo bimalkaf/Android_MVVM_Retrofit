@@ -8,6 +8,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import np.com.bimalkafle.R
+import np.com.bimalkafle.WeatherApplication
 import np.com.bimalkafle.api.ApiResponse
 import np.com.bimalkafle.api.ApiService
 import np.com.bimalkafle.api.RetrofitHelper
@@ -17,35 +18,22 @@ import np.com.bimalkafle.repository.WeatherRepository
 import np.com.bimalkafle.util.UiUtil
 import np.com.bimalkafle.viewmodel.MainViewModel
 import np.com.bimalkafle.viewmodel.MainViewModelFactory
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
+    @Inject
     lateinit var mainViewModel: MainViewModel
     lateinit var binding : ActivityMainBinding
-//     var isDark = false;
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        (applicationContext as WeatherApplication).applicationComponent.inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        when(resources.configuration.uiMode and
-//                Configuration.UI_MODE_NIGHT_MASK){
-//            Configuration.UI_MODE_NIGHT_YES -> isDark = true
-//            Configuration.UI_MODE_NIGHT_NO -> isDark = false
-//            Configuration.UI_MODE_NIGHT_UNDEFINED -> isDark = false
-//            else -> isDark = false
-//        }
         binding.mainParentLayout.setBackgroundResource(R.drawable.gradient_background_day)
-
-
-
-        val apiService = RetrofitHelper.getInstance().create(ApiService::class.java)
-        val repo = WeatherRepository(apiService)
-        mainViewModel =
-            ViewModelProvider(this, MainViewModelFactory(repo))[MainViewModel::class.java]
-
         mainViewModel.getCurrentWeather("Kathmandu")
 
         mainViewModel.currentWeather.observe(this) {

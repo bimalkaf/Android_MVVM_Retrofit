@@ -5,8 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import np.com.bimalkafle.api.ApiResponse
 import np.com.bimalkafle.api.ApiService
 import np.com.bimalkafle.model.current.CurrentWeatherModel
+import javax.inject.Inject
 
-class WeatherRepository(private val apiService: ApiService) {
+class WeatherRepository @Inject constructor (private val apiService: ApiService) {
 
     private val _currentWeatherLiveData = MutableLiveData<ApiResponse<CurrentWeatherModel>>()
     val currentWeather : LiveData<ApiResponse<CurrentWeatherModel>>
