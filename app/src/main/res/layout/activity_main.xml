@@ -2,235 +2,257 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main__parent_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/main__parent_layout"
     android:padding="20dp"
-    tools:background="@color/primary"
+    tools:background="@drawable/gradient_background_day"
     tools:context=".view.MainActivity">
 
-        <androidx.cardview.widget.CardView
+    <androidx.cardview.widget.CardView
+        android:id="@+id/search_card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:cardCornerRadius="20dp">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/search_card_view"
+            android:iconifiedByDefault="false"
+            android:queryBackground="@android:color/transparent"
+            app:iconifiedByDefault="false"
+            app:queryHint="Enter place name" />
 
-            app:cardCornerRadius="20dp">
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/searchView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:iconifiedByDefault="false"
-                app:queryHint="Enter place name"
-                android:queryBackground="@android:color/transparent"
-                app:iconifiedByDefault="false" />
-            <ProgressBar
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="end"
-                android:id="@+id/progress_indicator"
-                android:layout_below="@id/search_card_view"
-                android:layout_centerInParent="true"
-                android:layout_margin="10dp"
-                android:indeterminateTint="@color/primary_variant" />
-        </androidx.cardview.widget.CardView>
-
+        <ProgressBar
+            android:id="@+id/progress_indicator"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_below="@id/search_card_view"
+            android:layout_centerInParent="true"
+            android:layout_gravity="end"
+            android:layout_margin="10dp"
+            android:indeterminateTint="@color/primary_variant" />
+    </androidx.cardview.widget.CardView>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_below="@+id/search_card_view"
         android:layout_margin="20dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
+
         <TextView
+            android:id="@+id/place_textview"
+            android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/place_textview"
-            android:textColor="@color/design_default_color_on_primary"
-            style="@style/TextAppearance.Material3.DisplaySmall"
-            tools:text="New York"
-            android:drawableStart="@drawable/icon_location"
             android:layout_gravity="start"
-            android:drawablePadding="10dp"/>
+            android:drawableStart="@drawable/icon_location"
+
+            android:fontFamily="@font/poppins_light"
+            android:drawablePadding="10dp"
+            android:textColor="@color/design_default_color_on_primary"
+            tools:text="New York" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/temperature_celsius_textview"
-                android:textStyle="bold"
-                android:textColor="@color/design_default_color_on_primary"
-                style="@style/TextAppearance.Material3.DisplayLarge"
-                tools:text="10°c"/>
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="12dp"
-                android:id="@+id/condition_textview"
+                android:fontFamily="@font/poppins_semi_bold"
                 android:textColor="@color/design_default_color_on_primary"
+                android:textSize="50sp"
+                tools:text="10°c" />
+
+            <TextView
+                android:id="@+id/condition_textview"
                 style="@style/TextAppearance.Material3.TitleLarge"
-                tools:text="Cloudy"/>
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:paddingStart="12dp"
+                android:textColor="@color/design_default_color_on_primary"
+                tools:text="Partly cloudy" />
         </LinearLayout>
 
 
         <ImageView
+            android:id="@+id/image_view"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:id="@+id/image_view"
-            tools:src="@color/white"/>
-
-
+            tools:src="@color/white" />
 
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="20dp"
-            app:cardCornerRadius="16dp"
-            >
+            app:cardCornerRadius="16dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="12dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingVertical="12dp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="vertical">
+
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:id="@+id/humidity_textview"
                             style="@style/TextAppearance.Material3.HeadlineSmall"
-                            tools:text="89%"/>
-                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            tools:text="89%" />
+
+                        <TextView
                             style="@style/TextAppearance.Material3.LabelLarge"
-                            android:text="@string/humidity"/>
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/humidity" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_weight="1"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="vertical">
+
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:id="@+id/wind_speed_textview"
                             style="@style/TextAppearance.Material3.HeadlineSmall"
-                            tools:text="89%"/>
-                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            tools:text="89%" />
+
+                        <TextView
                             style="@style/TextAppearance.Material3.LabelLarge"
-                            android:text="@string/wind_speed"/>
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/wind_speed" />
                     </LinearLayout>
 
                 </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="12dp"
-                android:orientation="horizontal">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/uv_textview"
-                        style="@style/TextAppearance.Material3.HeadlineSmall"
-                        tools:text="89%"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/TextAppearance.Material3.LabelLarge"
-                        android:text="@string/uv"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:gravity="center">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/percipation_textview"
-                        style="@style/TextAppearance.Material3.HeadlineSmall"
-                        tools:text="89%"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/TextAppearance.Material3.LabelLarge"
-                        android:text="@string/precipitation"/>
-                </LinearLayout>
+                    android:orientation="horizontal"
+                    android:paddingVertical="12dp">
 
-            </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingVertical="12dp"
-                    android:orientation="horizontal">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="vertical">
+
                         <TextView
+                            android:id="@+id/uv_textview"
+                            style="@style/TextAppearance.Material3.HeadlineSmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            tools:text="89%" />
+
+                        <TextView
+                            style="@style/TextAppearance.Material3.LabelLarge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/uv" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/percipation_textview"
+                            style="@style/TextAppearance.Material3.HeadlineSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="89%" />
+
+                        <TextView
+                            style="@style/TextAppearance.Material3.LabelLarge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/precipitation" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingVertical="12dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
                             android:id="@+id/time_textview"
                             style="@style/TextAppearance.Material3.HeadlineSmall"
-                            tools:text="89%"/>
-                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            tools:text="89%" />
+
+                        <TextView
                             style="@style/TextAppearance.Material3.LabelLarge"
-                            android:text="@string/local_time"/>
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/local_time" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_weight="1"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="vertical">
+
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:id="@+id/date_textview"
                             style="@style/TextAppearance.Material3.HeadlineSmall"
-                            tools:text="89%"/>
-                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            tools:text="89%" />
+
+                        <TextView
                             style="@style/TextAppearance.Material3.LabelLarge"
-                            android:text="@string/local_date"/>
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/local_date" />
                     </LinearLayout>
 
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-
-
-
 
 
     </LinearLayout>

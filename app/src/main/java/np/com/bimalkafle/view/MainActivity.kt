@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 //            Configuration.UI_MODE_NIGHT_UNDEFINED -> isDark = false
 //            else -> isDark = false
 //        }
-        binding.mainParentLayout.setBackgroundResource(R.color.primary)
+        binding.mainParentLayout.setBackgroundResource(R.drawable.gradient_background_day)
 
 
 
@@ -85,13 +85,13 @@ class MainActivity : AppCompatActivity() {
     private fun setLocationData(data: CurrentWeatherModel?) {
        data?.let {
            if(it.current.is_day==0){
-               binding.mainParentLayout.setBackgroundResource(R.color.primary_dark)
+               binding.mainParentLayout.setBackgroundResource(R.drawable.gradient_background_night)
            }else{
-               binding.mainParentLayout.setBackgroundResource(R.color.primary)
+               binding.mainParentLayout.setBackgroundResource(R.drawable.gradient_background_day)
            }
 
            binding.progressIndicator.visibility = INVISIBLE
-           Glide.with(this).load("https:"+it.current.condition.icon).into(binding.imageView)
+           Glide.with(this).load(imageUrl(it.current.condition.icon)).into(binding.imageView)
            binding.dateTextview.text = it.location.localtime.split(" ")[0]
            binding.timeTextview.text = it.location.localtime.split(" ")[1]
            binding.placeTextview.text = it.location.name
@@ -106,6 +106,8 @@ class MainActivity : AppCompatActivity() {
 
        }
     }
+
+    private fun imageUrl(url : String) : String = "https:"+url.replace("64x64","128x128")
 
 
 }
