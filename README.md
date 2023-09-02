@@ -69,6 +69,19 @@ Get api key from https://www.weatherapi.com/
    
    Open the project in Android Studio or your preferred Android development environment. Build and run the application on an Android emulator or a physical Android device.
 
+## Branches
+
+This repository includes multiple branches to demonstrate various stages of development:
+
+- **retrofit_mvvm**: The base branch showcasing the implementation of MVVM architecture with Retrofit for API requests.
+  
+- **retrofit_mvvm+dagger**: Extends the base branch with Dagger for dependency injection.
+  
+- **retrofit_mvvm+dagger+hilt**: Further enhances the previous branch by replacing Dagger with Hilt for dependency injection.
+
+- **main**: The main branch where the latest features and enhancements from the other branches are merged.
+
+You can switch between branches to explore the different stages of development and see how Retrofit, MVVM, Dagger, and Hilt are integrated into the Weather App.
 
 
 ## Screenshots
