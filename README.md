@@ -1,4 +1,4 @@
-# Weather App - Android
+# Weather App - Native Android
 
 
 The Weather App is a simple Android application that allows users to check the current weather conditions for a specific location. It demonstrates the usage of the MVVM architecture, Retrofit for API calls, Glide for image loading, and clean code organization. This README will provide an overview of the project, its components, and how to set it up.
